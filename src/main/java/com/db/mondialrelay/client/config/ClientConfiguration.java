@@ -5,13 +5,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 
+/**
+ * Mondial Relay client configuration
+ *
+ * @Author Djihad BENGATI
+ */
 @Configuration
 public class ClientConfiguration {
 
     @Bean
     public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        String[] packagesToScan= {"com.db.mondialrelay.model.wsdl"};
+        String[] packagesToScan = {"com.db.mondialrelay.model.wsdl"};
         marshaller.setPackagesToScan(packagesToScan);
         return marshaller;
     }

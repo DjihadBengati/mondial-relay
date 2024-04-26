@@ -1,29 +1,35 @@
 package com.db.mondialrelay.util;
 
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang3.StringUtils;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.stream.Collectors;
+
+import static java.util.Arrays.stream;
+import static org.apache.commons.codec.digest.DigestUtils.md5Hex;
+
+/**
+ * Request utils
+ *
+ * @Author Djihad BENGATI
+ */
 
 @UtilityClass
 public class RequestUtils {
 
-    public static String generateSecurityField(String... args) {
-        try {
-            String result = Arrays.stream(args)
-                    .filter(Objects::nonNull)
-                    .collect(Collectors.joining());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : MessageDigest.getInstance("MD5")
-                    .digest(result.getBytes())) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString().toUpperCase();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+    /**
+     * This function generates a security field by concatenating the non-null strings provided as arguments,
+     * applying MD5 hashing to the concatenated string, and then converting the result to uppercase.
+     *
+     * @param args elements for security field
+     * @return {@link String} the security field
+     */
+    public static String generateSecurityField(Object... args) {
+        String result = stream(args)
+                .filter(s -> Objects.nonNull(s) || (s instanceof String && StringUtils.isNotBlank((String) s)))
+                .map(Object::toString)
+                .collect(Collectors.joining());
+        return md5Hex(result).toUpperCase();
     }
 }

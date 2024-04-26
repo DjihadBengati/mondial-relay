@@ -3,10 +3,10 @@ package com.db.mondialrelay.model;
 import lombok.Builder;
 
 /**
- * Commune object
+ * Periode Object
  *
  * @Author Djihad BENGATI
  */
 @Builder
-public record Commune(String cp, String ville, String pays) {
+public record Periode(String debut, String fin) {
 }
