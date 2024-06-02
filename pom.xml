@@ -11,7 +11,7 @@
 
     <groupId>com.db.mondialrelay</groupId>
     <artifactId>mondial-relay</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>mondial-relay</name>
     <description>MondialRelay Webservice library</description>
     <properties>
